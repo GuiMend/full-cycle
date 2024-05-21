@@ -1,18 +1,14 @@
 services:
   db:
-    platform: linux/x86_64
-    image: mysql:5.7
+    build:
+      context: ./mysql
+    image: guigmen/mysql
     command: --innodb-use-native-aio=0
     restart: always
     tty: true
     container_name: db
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./sql:/var/lib/mysql
     networks:
       - node-network
 
